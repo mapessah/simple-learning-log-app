@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {% block title %}{% endblock %} </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'learning_log/css/base_styles.css' %}">
+        {% block extra_head %}{% endblock extra_head %}
+    </head>
+    <body>
+        <div class="nav-bar">
+            <p>
+                <div id="nav">
+                    <a href="{% url 'learning_log:index' %}">Home</a>
+                </div>
+                <div id="nav">
+                    <a href="{% url 'learning_log:topics' %}">Topics</a>
+                </div>
+
+            {% if user.is_authenticated %}
+                <div id="nav">
+                    <form action="{% url 'accounts:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button name="submit" id="logout-button">Sign out</button>
+                    </form>
+                </div>
+                <div id="nav">Hello {{ user.username }}</div>
+            {% else %}
+                <div id="nav"><a href="{% url 'accounts:login' %}">Login</a></div>
+                <div id="nav"><a href="{% url 'accounts:register' %}">Register</a></div>
+            {% endif %}
+            </p>
+        </div>
+        <div id="content">
+        {% block content %}
+            
+        {% endblock content %}
+        </div>
+        <hr>
+        <div class="footer">
+            <p>
+                <b><i style="font-size:0.9em;">&copy; 2025 Learning Logs App</i></b>
+            </p>
+        </div>
+        
+    </body>
+</html>

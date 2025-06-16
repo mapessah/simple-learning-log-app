@@ -1,0 +1,21 @@
+{% extends 'learning_log/base.html' %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block extra_head %}
+
+{% endblock extra_head %}
+{% block content %}
+
+{% if form.errors %}
+<p>Invalid username or password.</p>
+{% endif %}
+<h1>Log In</h1>
+<p>Fill below to log into your account.</p>
+<form action="{% url 'accounts:login' %}", method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit" id="form-button">Login</button>
+</form>
+
+{% endblock content %}

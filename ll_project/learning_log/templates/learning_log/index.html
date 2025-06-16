@@ -1,0 +1,44 @@
+{% extends 'learning_log/base.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+<h1>Welcome to Your Learning Logs!</h1>
+
+<p>Your personal space to track, organize, and reflect on everything you're learning. Whether it's a new programming language, a historical period, a musical instrument, or simply daily observations, Learning Logs helps you keep it all in one place.</p>
+<p>
+  <strong>With Learning Logs, you can:</strong>
+</p>
+<ul>
+  <li>Create personalized topics for any subject.</li>
+  <li>Add detailed entries to document your progress, insights, and questions.</li>
+  <li>Easily review and revisit your learning journey.</li>
+</ul>
+
+{% if user.is_authenticated %}
+    <p>
+        Want to view your topics? 
+        <a href="{% url 'learning_log:topics' %}">click here.</a>
+    </p>
+{% else %}
+    <div>
+        <p>
+            Ready to start logging your knowledge?
+            <a href="{% url 'accounts:register' %}">Register Now</a>
+        </p>
+        <p>Already have an account? <a href="{% url 'accounts:login' %}">Log In</a></p>
+    </div>
+{% endif %}
+
+<div class="features">
+  <h2>Why Learning Logs?</h2>
+  <p>In today's fast-paced world, continuous learning is key. But how often do we truly retain what we learn? Learning Logs provides a structured yet flexible way to solidify your understanding and see your growth over time. It's more than just a notebook; it's a dynamic record of your intellectual development.</p>
+  <ul>
+    <li><strong>Organized:</strong> Keep all your learning notes neatly categorized by topic.</li>
+    <li><strong>Reflective:</strong> Encourage deeper understanding by prompting you to summarize and reflect.</li>
+    <li><strong>Accessible:</strong> Access your logs anytime, anywhere.</li>
+    <li><strong>Motivating:</strong> See your progress and stay inspired on your learning journey.</li>
+  </ul>
+</div>
+
+{% endblock content %}
